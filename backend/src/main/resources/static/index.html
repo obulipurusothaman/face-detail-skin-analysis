@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#6750a4"><meta name="apple-mobile-web-app-capable" content="yes">
+  <title>Face Detail &amp; Skin Analysis</title>
+  <link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="icon.svg"><link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="app">
+    <header><div><p class="eyebrow">PRIVATE • LOCAL ANALYSIS</p><h1>Face Detail &amp; Skin Analysis</h1></div><div class="status-dot"><span></span>100% on-device</div></header>
+
+    <section id="profilePanel" class="profile-panel">
+      <div><p class="eyebrow">PERSONAL PROFILE</p><h2>Before we begin</h2><p class="profile-intro">Required for identifying and naming downloaded reports.</p></div>
+      <form id="profileForm" class="profile-form">
+        <label>Full name *<input id="profileName" name="name" required minlength="2" maxlength="80" autocomplete="name" placeholder="Enter full name"></label>
+        <label>Age *<input id="profileAge" name="age" required type="number" min="13" max="120" inputmode="numeric" placeholder="Age"></label>
+        <button type="submit" class="primary">Continue</button>
+      </form>
+    </section>
+
+    <nav id="mainNav" class="main-nav" hidden>
+      <button class="nav-button active" data-view="scan">New analysis</button>
+      <button class="nav-button" data-view="history">My history</button>
+      <button class="nav-button" data-view="progress">Progress</button>
+      <button id="editProfileButton" class="profile-chip" type="button"></button>
+    </nav>
+
+    <section id="scanView" class="workspace" hidden>
+      <div class="camera-panel" id="cameraPanel">
+        <video id="camera" autoplay muted playsinline></video><img id="preview" alt="Selected face">
+        <div id="guide" class="guide"></div><canvas id="canvas" hidden></canvas>
+        <div id="qualityBadge" class="quality-badge">Waiting for image</div>
+      </div>
+      <aside class="side-panel">
+        <h2>Capture tips</h2>
+        <ul class="tips"><li><span>1</span>Face forward in the oval</li><li><span>2</span>Use bright, natural light</li><li><span>3</span>Remove heavy makeup filters</li><li><span>4</span>Hold the camera steady</li></ul>
+        <div class="quality-checks"><div>Lighting <b id="lightCheck">—</b></div><div>Sharpness <b id="sharpCheck">—</b></div><div>Resolution <b id="resolutionCheck">—</b></div></div>
+      </aside>
+      <div class="controls"><button id="cameraBtn" class="primary">Start camera</button><button id="scanBtn" class="primary" disabled>Capture &amp; analyze</button><label class="upload">Choose photo<input id="upload" type="file" accept="image/*"></label></div>
+    </section>
+
+    <section id="results" class="results" hidden>
+      <div class="results-heading"><div><p class="eyebrow">SCAN COMPLETE</p><h2 id="resultTitle">Analysis overview</h2></div><span id="confidenceBadge" class="confidence"></span></div>
+      <div class="grid" id="cards"></div>
+      <p class="disclaimer">This is a cosmetic estimation from photo pixels, not a medical diagnosis. Lighting and image quality affect results.</p>
+      <div class="result-actions"><button id="saveBtn" class="primary">Save report</button><button id="printBtn" class="secondary">Print / Save PDF</button></div>
+    </section>
+
+    <section id="historyView" class="dashboard-view" hidden>
+      <div class="view-heading"><div><p class="eyebrow">PERSONAL RECORD</p><h2>Analysis history</h2></div><button id="clearHistoryButton" class="danger-button">Clear history</button></div>
+      <div id="historyList" class="history-list"></div>
+    </section>
+
+    <section id="progressView" class="dashboard-view" hidden>
+      <div class="view-heading"><div><p class="eyebrow">PERIODIC TREND</p><h2>Skin progress</h2></div><span id="improvementSummary" class="confidence"></span></div>
+      <div class="chart-card"><canvas id="progressChart" width="900" height="330"></canvas><div class="chart-legend"><span><i class="glow-key"></i>Glow</span><span><i class="moisture-key"></i>Moisture</span><span><i class="blemish-key"></i>Blemish recovery</span></div></div>
+    </section>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
